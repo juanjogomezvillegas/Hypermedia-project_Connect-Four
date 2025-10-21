@@ -5,10 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect Four</title>
     <!-- stylesheet files -->
-     <link type="text/stylesheet" rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <!-- javascript files -->
     <script src="index.js"></script>
 </head>
 <body>
+    <header>
+        <h1>Connect Four</h1>
+    </header>
+    <div id="container">
+        <section>
+            <h2 id="subtitle">Player Information</h2>
+            <hr class="line" />
+            <article id="middle">
+                <div>
+                    <label for="inPlayer1">Name player 1:</label>
+                    <input type="text" id="inPlayer1" name="player1">
+                </div>
+                <div>
+                    <label for="inPlayer2">Name player 2:</label>
+                    <input type="text" id="inPlayer2" name="player2">
+                </div>
+                <button id="btnPlay" class="btnInit">Play!</button>
+            </article>
+        </section>
+    </div>
 </body>
 </html>
