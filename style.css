@@ -92,6 +92,10 @@ div#container section > article table > tr > td {
     color: var(--white);
 }
 
+div#container section > article table > tr > th {
+    padding-bottom: 15px;
+}
+
 div#container section > article button.btnsBoard {
     width: 45px;
     padding: 10px;
