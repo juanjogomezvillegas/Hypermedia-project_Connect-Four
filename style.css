@@ -9,6 +9,18 @@
    --colorSecondary: #0132AE;
 }
 
+@keyframes changeTheme {
+    0% {background-color: #ff0000;}
+    50% {background-color: #ffff00;}
+    75% {background-color: #00ff00;}
+    100% {background-color: #0000ff;}
+}
+
+@keyframes rotateElem {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +40,16 @@ hr.line {
 
 header {
     padding: 20px;
+    background-color: var(--colorPrimary);
+    color: var(--white);
+}
+
+header button#modeDisco {
+    margin-right: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 17px;
+    border: 0px;
     background-color: var(--colorPrimary);
     color: var(--white);
 }
