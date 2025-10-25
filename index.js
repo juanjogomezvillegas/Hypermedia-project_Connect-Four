@@ -157,15 +157,15 @@ function checkSolutionBoard() {
 
     if (wonGame == 0) {
         // iterate board by columns
-        /*for (i = 0; i < board.length && wonGame == 0; i++) {
+        for (i = 0; i < board.length && wonGame == 0; i++) {
             for (j = 0; j < board[i].length && wonGame == 0; j++) {
                 if ((board[i].length - j) >= 4) {
                     if (board[j][i] == board[j+1][i] && board[j][i] == board[j+2][i] && board[j][i] == board[j+3][i]){
-                        wonGame = board[i][j];
+                        wonGame = board[j][i];
                     }
                 }
             }
-        }*/
+        }
 
         if (wonGame == 0) {
             // iterate board by diagonals
