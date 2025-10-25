@@ -101,7 +101,11 @@ div#container section > article button.btnsBoard {
     padding: 10px;
     cursor:crosshair;
     border-radius: 50%;
-    background-color: var(--red);
     color: var(--white);
     font-weight: bold;
+}
+
+span.gameChips {
+    padding: 10px;
+    border-radius: 50%;
 }
