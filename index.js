@@ -18,18 +18,6 @@ class Player {
     }
 }
 
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-});
-
 let player1;
 let player2;
 let board;
@@ -60,10 +48,9 @@ function init() {
     let colp2 = document.getElementById("inColorPlayer2").value;
 
     if (p1 === "" || p2 === "") {
-        Toast.fire({
-            icon: 'error',
-            title: "Error! Name player 1 or 2 is missing."
-        });
+        showAlert("error", "Error! Name player 1 or 2 is missing.");
+    } else if (p1 == p2) {
+        showAlert("error", "Error! Names player 1 and 2 is equal.");
     } else {
         player1 = new Player(p1, colp1);
         player2 = new Player(p2, colp2);
@@ -145,10 +132,7 @@ function move(col) {
             board[i][col] = currentPlayer;
             fi = 1;
         } else if (i == 0 && board[i][col] != 0) {
-            Toast.fire({
-                icon: 'info',
-                title: "Alert! Invalid movement."
-            });
+            showAlert("info", "Alert! Invalid movement.");
             fi = 1;
         }
         i--;
@@ -165,7 +149,8 @@ function move(col) {
     insertBoard();
 
     if (won != 0) {
-        showMsgCongratulations(won == 1? player1.meNameIs(): player2.meNameIs());
+        playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
+        showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
         modeDiscoActivated();
     }
 }
@@ -229,13 +214,4 @@ function setAnimation(elem, animationName = "", animationDuration = "", animatio
     elem.style.animationName = animationName;
     elem.style.animationDuration = animationDuration;
     elem.style.animationIterationCount = animationIterCount;
-}
-
-function showMsgCongratulations(playerName) {
-    Swal.fire({
-        title: "And the winner is "+playerName+"!",
-        text: "Congratulations "+playerName+"! You have won the game! ",
-        icon: 'success',
-        draggable: true
-    });
 }

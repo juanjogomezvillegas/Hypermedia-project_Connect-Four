@@ -111,11 +111,10 @@ div#container section > article table > tr > td {
     padding: 15px;
     border: 5px solid var(--colorSecondary);
     text-align: center;
-    color: var(--white);
 }
 
 div#container section > article table > tr > th {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 div#container section > article button.btnsBoard {
