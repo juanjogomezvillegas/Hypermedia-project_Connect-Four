@@ -103,15 +103,19 @@ function buildBoard(board) {
 
             let gameChips = document.createElement("span");
             gameChips.setAttribute("class", "gameChips");
+            gameChips.innerHTML = "vv";
 
             if (board[i][j] == 1) {
                 gameChips.style.backgroundColor = player1.meColorIs();
+                gameChips.style.color = player1.meColorIs();
                 cell.appendChild(gameChips);
             } else if (board[i][j] == 2) {
                 gameChips.style.backgroundColor = player2.meColorIs();
+                gameChips.style.color = player2.meColorIs();
                 cell.appendChild(gameChips);
             } else if (board[i][j] == 0) {
                 gameChips.style.backgroundColor = "white";
+                gameChips.style.color = "white";
                 cell.appendChild(gameChips);
             }
 
@@ -197,7 +201,7 @@ function modeDiscoActivated() {
     let body = document.body;
 
     if (!modeDisco) {
-        setAnimation(body, "changeTheme", "0.03s", "infinite");
+        setAnimation(body, "changeTheme", "1s", "infinite");
         modeDisco = true;
         document.getElementById("modeDisco").innerHTML = "<i class=\"fa fa-pause\"></i>";
     } else {

@@ -10,10 +10,11 @@
 }
 
 @keyframes changeTheme {
-    0% {background-color: #ff0000;}
-    50% {background-color: #ffff00;}
-    75% {background-color: #00ff00;}
-    100% {background-color: #0000ff;}
+    0% {background-color: #000000;}
+    25% {background-color: #ff0000;}
+    50% {background-color: #00ff00;}
+    75% {background-color: #0000ff;}
+    100% {background-color: #ffffff;}
 }
 
 @keyframes rotateElem {
@@ -79,9 +80,9 @@ div#container section > article div {
 }
 
 div#container section > article button.btnInit {
-    width: 100px;
+    width: 125px;
     margin: 20px;
-    padding: 3px;
+    padding: 10px;
     border-radius: 10%;
     background-color: var(--colorPrimary);
     color: var(--white);
@@ -91,7 +92,7 @@ div#container section > article button.btnInit {
 
 div#container section > article button.btnInit:hover {
     background-color: var(--colorSecondary);
-    border-radius: 50%;
+    border-radius: 25%;
     transition: all .5s;
 }
 
@@ -104,12 +105,12 @@ div#container section > article label {
 }
 
 div#container section > article table {
-    width: 35%;
+    width: 800px;
 }
 
 div#container section > article table > tr > td {
     padding: 15px;
-    border: 5px solid var(--colorSecondary);
+    border: 3px solid var(--colorSecondary);
     text-align: center;
 }
 
@@ -117,16 +118,17 @@ div#container section > article table > tr > th {
     padding-bottom: 10px;
 }
 
-div#container section > article button.btnsBoard {
+button.btnsBoard {
     width: 45px;
     padding: 10px;
-    cursor:crosshair;
+    cursor: crosshair;
     border-radius: 50%;
-    color: var(--white);
+    color: var(--black);
     font-weight: bold;
 }
 
 span.gameChips {
+    width: 45px;
     padding: 10px;
     border-radius: 50%;
 }
