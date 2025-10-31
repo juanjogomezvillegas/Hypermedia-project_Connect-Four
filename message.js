@@ -1,4 +1,11 @@
 
+/*
+ * Author: Juan José Gómez Villegas
+ * Description: Project 2. connect four, messages of javascript file
+*/
+
+/* CONSTANTS */
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -11,6 +18,11 @@ const Toast = Swal.mixin({
     }
 });
 
+/* FUNCTIONS */
+
+/*
+* showMsgCongratulations: show a message congratulations, reporting the name of the winning player
+*/
 function showMsgCongratulations(title, text, icon) {
     Swal.fire({
         title: title,
@@ -20,6 +32,9 @@ function showMsgCongratulations(title, text, icon) {
     });
 }
 
+/*
+* showAlert: show a toast alert in case of error
+*/
 function showAlert(icon, title) {
     Toast.fire({
         icon: icon,

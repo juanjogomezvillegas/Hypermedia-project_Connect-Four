@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Four</title>
+    <meta name="author" content="Juan José Gómez Villegas">
+    <meta name="description" content="Project 2. connect four">
+    <meta name="viewport" content="Width=device-Width,initial-scale=1">
+    <meta name="X-Frame-Options" content="DENY">
+    <!-- title established with javascript -->
+    <title></title>
+    <link rel="icon" id="faviconPage">
     <!-- stylesheets and javascript via CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -11,37 +16,31 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <!-- javascript files -->
     <script src="./sweetalert2@11"></script>
+    <script src="objects.js"></script>
     <script src="message.js"></script>
     <script src="index.js"></script>
     <!-- stylesheet files -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <header>
-        <h1><button id="modeDisco"><i class="fa fa-play"></i></button>Connect Four</h1>
+    <!-- header section -->
+    <header role="header" aria-roledescription="header">
+        <div>
+            <button id="modeDisco"><i class="fa fa-play"></i></button>
+            <h1>Connect Four</h1>
+        </div>
     </header>
-    <div id="container">
-        <section>
-            <h2 id="subtitle">Player Information</h2>
+
+    <!-- container section -->
+    <div id="container" role="container" aria-roledescription="container">
+        <!-- main content page section -->
+        <section id="contentPage" role="content the page" aria-roledescription="content the page">
+            <h2 id="subtitle"></h2>
+
             <hr class="line" />
+            
+            <!-- middle content page article -->
             <article id="middle">
-                <div>
-                    <label for="inPlayer1">Name player 1:</label>
-                    <input type="text" id="inPlayer1" name="player1">
-                </div>
-                <div>
-                    <label for="inColorPlayer1">Color player 1:</label>
-                    <input type="color" id="inColorPlayer1" name="colorPlayer1" value="#ff0000">
-                </div>
-                <div>
-                    <label for="inPlayer2">Name player 2:</label>
-                    <input type="text" id="inPlayer2" name="player2">
-                </div>
-                <div>
-                    <label for="inColorPlayer2">Color player 1:</label>
-                    <input type="color" id="inColorPlayer2" name="colorPlayer2" value="#ffff00">
-                </div>
-                <button id="btnPlay" class="btnInit">Play!</button>
             </article>
         </section>
     </div>

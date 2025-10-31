@@ -1,43 +1,58 @@
 
-:root{
-   --black: #000000;
-   --white: #ffffff;
-   --gray: #898989;
-   --lightGray: #DDDDDD;
-   --red: #EC0000;
-   --colorPrimary: #00206F;
-   --colorSecondary: #0132AE;
+/*
+ * Author: Juan José Gómez Villegas
+ * Description: Project 1. CV, stylesheets file
+*/
+
+/* CSS VARIABLES */
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #7C7C7C;
+    --lightGray: #D6D6D6;
+    --colorPrimary: #000C6A;
+    --colorSecundary: #0115A8;
+    --backgroudColorBody: #7BFFF6;
+    --textColorBody: #000000;
+    --colorDisco: #F000AC;
 }
 
+/* CSS ANIMATIONS */
+
+/* Animation by change theme */
 @keyframes changeTheme {
-    0% {background-color: #000000;}
-    25% {background-color: #ff0000;}
-    50% {background-color: #00ff00;}
-    75% {background-color: #0000ff;}
-    100% {background-color: #ffffff;}
+    0% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 0%);}
+    50% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 50%);}
+    100% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 100%);}
 }
 
+/* Animation by rotate elements */
 @keyframes rotateElem {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
 
+/* FOR ALL DEVICES */
+
+/* For all descendents of the elements
+ * CSS Specificity = 0 */
 * {
     margin: 0;
     padding: 0;
-    font-size: 17px;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
-    font-size: 30px;
-    text-align: center;
+/* For body element
+ * CSS Specificity = 1 */
+body {
+    background-color: var(--backgroudColorBody);
+    color: var(--textColorBody);
 }
 
-hr.line {
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
+/* FOR DESKTOP */
+
+/* header styles */
 
 header {
     padding: 20px;
@@ -45,90 +60,145 @@ header {
     color: var(--white);
 }
 
-header button#modeDisco {
+header div {
+    display: flex;
+    justify-content: center;
+}
+
+header div > button {
     margin-right: 15px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 17px;
     border: 0px;
     background-color: var(--colorPrimary);
     color: var(--white);
 }
 
-div#container article {
-    margin-left: 50px;
-    margin-right: 50px;
-}
+/* main container styles */
 
-div#container section > h2 {
-    margin: 10px;
+div#container h2 {
+    margin-top: 10px;
     padding: 10px;
-    text-align: center;
-    font-size: 20px;
-    background-color: var(--lightGray);
-    color: var(--black);
+    background-color: var(--colorSecundary);
+    color: var(--white);
 }
 
-div#container section > article {
+div#container article {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 50px 100px 50px 100px;
 }
 
-div#container section > article div {
-    margin: 20px;
+/* init form */
+
+div#container article > div {
+    margin: 10px;
 }
 
-div#container section > article button.btnInit {
-    width: 125px;
-    margin: 20px;
+div#container article > div label {
+    margin-right: 10px;
+}
+
+div#container article > div input {
+    padding: 5px;
+    border: 1px solid var(--black);
+    border-radius: 3%;
+    background-color: var(--backgroudColorBody);
+}
+
+div#container article > div button {
+    width: 200px;
     padding: 10px;
-    border-radius: 10%;
+    border: 1px solid var(--black);
+    border-radius: 5%;
     background-color: var(--colorPrimary);
     color: var(--white);
     font-weight: bold;
     transition: all .5s;
 }
 
-div#container section > article button.btnInit:hover {
-    background-color: var(--colorSecondary);
-    border-radius: 25%;
+div#container article > div button:hover {
+    background-color: var(--colorSecundary);
+    border-radius: 50%;
     transition: all .5s;
 }
 
-div#container section > article input {
-    padding: 5px;
-}
+/* board of game */
 
-div#container section > article label {
-    margin-right: 20px;
-}
-
-div#container section > article table {
+div#container article table {
     width: 800px;
 }
 
-div#container section > article table > tr > td {
+div#container article table tr > td {
     padding: 15px;
-    border: 3px solid var(--colorSecondary);
     text-align: center;
+    border: 5px solid var(--colorSecundary);
 }
 
-div#container section > article table > tr > th {
-    padding-bottom: 10px;
+div#container article table tr > th {
+    padding: 10px;
 }
 
 button.btnsBoard {
     width: 45px;
     padding: 10px;
-    cursor: crosshair;
+    border: 1px solid;
     border-radius: 50%;
-    color: var(--black);
-    font-weight: bold;
 }
 
 span.gameChips {
     width: 45px;
     padding: 10px;
+    border: 1px solid;
     border-radius: 50%;
+}
+
+/* other styles */
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 25px;
+    text-align: center;
+}
+
+hr.line {
+    margin: 25px 10px 25px 10px;
+    border: 2px solid var(--black);
+}
+
+@media only screen and (max-width: 860px) {
+    /* FOR MOBILE PHONE */
+
+    /* board of game */
+
+    div#container article table {
+        width: 100px;
+    }
+
+    div#container article table tr > td {
+        padding: 5px;
+        text-align: center;
+        border: 5px solid var(--colorSecundary);
+    }
+
+    div#container article table tr > th {
+        padding: 5px;
+    }
+
+    button.btnsBoard {
+        width: 30px;
+        padding: 2px;
+        border: 1px solid;
+        border-radius: 50%;
+    }
+
+    span.gameChips {
+        width: 30px;
+        padding: 2px;
+        border: 1px solid;
+        border-radius: 50%;
+    }
 }
