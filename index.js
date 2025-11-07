@@ -26,8 +26,9 @@ let modeDisco = false;
 window.onload = () => {
     document.title = "Connect Four";
     document.getElementById("faviconPage").href = "./images/img1.jpg";
-    currentTheme = 1;
-    document.getElementById("changeTheme").innerHTML = "1";
+    currentTheme = localStorage.getItem("currentTheme")? localStorage.getItem("currentTheme"): 1;
+    document.getElementById("changeTheme").innerHTML = currentTheme;
+    establishTheme();
     formInit();
 
     document.getElementById("btnPlay").addEventListener("click", gameInit);
@@ -42,11 +43,19 @@ window.onload = () => {
 */
 function changeTheme(e) {
     // update theme
-    currentTheme = currentTheme == maxTheme? 1: currentTheme + 1;
+    currentTheme = currentTheme == maxTheme? 1: parseInt(currentTheme) + 1;
     e.target.innerHTML = currentTheme;
+    localStorage.removeItem("currentTheme");
+    localStorage.setItem("currentTheme", currentTheme);
+    establishTheme();
+}
 
+/*
+* establishTheme: established current theme of the web page
+*/
+function establishTheme() {
     // establish new theme
-    switch (currentTheme) {
+    switch (parseInt(currentTheme)) {
         case 1:
             setCssVar("--colorPrimary", "#0D0A0A");
             setCssVar("--colorSecundary", "#141414");
