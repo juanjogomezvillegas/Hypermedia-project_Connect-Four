@@ -232,6 +232,23 @@ function checkSolutionBoard() {
 
         if (wonGame == 0) {
             // iterate board by diagonals
+            for (let i = 0; i < board.length && wonGame == 0; i++) {
+                for (let j = 0; j < board[i].length && wonGame == 0; j++) {
+                    // check diagonat from left to right
+                    if (i <= board.length - 4 && j <= board.length - 4) {
+                        if (board[i][j] == board[i+1][j+1] && board[i][j] == board[i+2][j+2] && board[i][j] == board[i+3][j+3]) {
+                            wonGame = board[i][j];
+                        }
+                    }
+
+                    // check diagonat from right to left
+                    if (i >= 3 && j <= board[i].length - 4) {
+                        if (board[i][j] == board[i-1][j+1] && board[i][j] == board[i-2][j+2] && board[i][j] == board[i-3][j+3]) {
+                            wonGame = board[i][j];
+                        }
+                    }
+                }
+            }
         }
     }
 
