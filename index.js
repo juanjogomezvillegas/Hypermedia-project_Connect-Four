@@ -5,6 +5,7 @@
 */
 
 /* CONSTANTS */
+
 const listChips = [new Pair("red", new Chip("#ff6363", "#ff0000")), 
                    new Pair("yellow", new Chip("#ffff63", "#ffff00")), 
                    new Pair("blue", new Chip("#6363ff", "#0000ff")), 
@@ -145,7 +146,7 @@ function formInit() {
     middleSection.appendChild(document.createElement("br"));
 
     middleSection.appendChild(getInput(true, "text", "inPlayer2", "inPlayer2", "Name player 2", "", "Name player 2"));
-
+    
     middleSection.appendChild(getSelect(true, "inColorPlayer2", "inColorPlayer2", "", "Color player 2", listChipsfst));
 
     middleSection.appendChild(document.createElement("br"));
@@ -356,3 +357,5 @@ function isDrawGame() {
 
     return (countZeros == 0);
 }
+
+/* FUNCTIONS IN COMPUTER PLAYER */
