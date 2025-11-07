@@ -4,27 +4,81 @@
  * Description: Project 2. connect four, code of javascript file
 */
 
+/* CONSTANTS */
+const listChips = [new Pair("red", new Chip("#ff6363", "#ff0000")), 
+                   new Pair("yellow", new Chip("#ffff63", "#ffff00")), 
+                   new Pair("blue", new Chip("#6363ff", "#0000ff")), 
+                   new Pair("green", new Chip("#63ff63", "#00ff00"))];
+
 /* GLOBAL VARIABLES */
 
 let board;
 let player1;
 let player2;
 let currentPlayer;
+let maxTheme = 6;
+let currentTheme;
 let gameEnd = false;
 let modeDisco = false;
 
 /* PRINCIPAL EVENTS */
 
 window.onload = () => {
-    formInit();
     document.title = "Connect Four";
     document.getElementById("faviconPage").href = "./images/img1.jpg";
+    currentTheme = 1;
+    document.getElementById("changeTheme").innerHTML = "1";
+    formInit();
 
     document.getElementById("btnPlay").addEventListener("click", gameInit);
+    document.getElementById("changeTheme").addEventListener("click", changeTheme);
     document.getElementById("modeDisco").addEventListener("click", modeDiscoActivated);
 }
 
 /* MAIN FUNCTIONS */
+
+/*
+* changeTheme: change theme of the web page
+*/
+function changeTheme(e) {
+    // update theme
+    currentTheme = currentTheme == maxTheme? 1: currentTheme + 1;
+    e.target.innerHTML = currentTheme;
+
+    // establish new theme
+    switch (currentTheme) {
+        case 1:
+            setCssVar("--colorPrimary", "#0D0A0A");
+            setCssVar("--colorSecundary", "#141414");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+        case 2:
+            setCssVar("--colorPrimary", "#00023D");
+            setCssVar("--colorSecundary", "#00035F");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+        case 3:
+            setCssVar("--colorPrimary", "#3F0000");
+            setCssVar("--colorSecundary", "#650000");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+        case 4:
+            setCssVar("--colorPrimary", "#38003E");
+            setCssVar("--colorSecundary", "#54005D");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+        case 5:
+            setCssVar("--colorPrimary", "#5B4500");
+            setCssVar("--colorSecundary", "#826200");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+        case 6:
+            setCssVar("--colorPrimary", "#085200");
+            setCssVar("--colorSecundary", "#097100");
+            setCssVar("--textColor", getCssVar("--white"));
+            break;
+    }
+}
 
 /*
 * gameInit: before start a game
@@ -45,8 +99,8 @@ function gameInit() {
     } else if (boardSize < 4 || boardSize >= 10) {
         showAlert("error", "Error! Board size must be between 4 and 9.");
     } else {
-        player1 = new Player(p1, colp1);
-        player2 = new Player(p2, colp2);
+        player1 = new Player(p1, listChips[colp1].second());
+        player2 = new Player(p2, listChips[colp2].second());
         currentPlayer = 1;
         
         board = [];
@@ -68,35 +122,43 @@ function gameInit() {
 */
 function formInit() {
     document.getElementById("subtitle").innerText = "Player Information";
-
     let middleSection = document.getElementById("middle");
 
-    middleSection.appendChild(getInput("text", "inPlayer1", "player1", "Name player 1"));
-    middleSection.appendChild(getInput("color", "inColorPlayer1", "colorPlayer1", "Color player 1", "#ff0000"));
+    let listChipsfst = [];
+    listChips.map((val) => {
+        listChipsfst.push(val.first());
+    });
+
+    middleSection.appendChild(getInput(true, "text", "inPlayer1", "inPlayer1", "Name player 1", "", "Name player 1"));
+
+    middleSection.appendChild(getSelect(true, "inColorPlayer1", "inColorPlayer1", "", "Color player 1", listChipsfst));
 
     middleSection.appendChild(document.createElement("br"));
 
-    middleSection.appendChild(getInput("text", "inPlayer2", "player2", "Name player 2"));
-    middleSection.appendChild(getInput("color", "inColorPlayer2", "colorPlayer2", "Color player 2", "#ffff00"));
+    middleSection.appendChild(getInput(true, "text", "inPlayer2", "inPlayer2", "Name player 2", "", "Name player 2"));
+
+    middleSection.appendChild(getSelect(true, "inColorPlayer2", "inColorPlayer2", "", "Color player 2", listChipsfst));
 
     middleSection.appendChild(document.createElement("br"));
 
-    middleSection.appendChild(getInput("text", "inNumRowsCols", "numRowsCols", "Board size", "7"));
+    middleSection.appendChild(getInput(true, "text", "inNumRowsCols", "inNumRowsCols", "Board size", "", "Board size", "7"));
 
     middleSection.appendChild(document.createElement("br"));
 
-    middleSection.appendChild(getButton(true, "Play!", "btnPlay", "btnPlay"));
+    middleSection.appendChild(getButton(true, "Play!", "btnPlay"));
 }
 
 /*
 * move: make a move one of the two players
 */
 function move(col) {
+    let changePlayer = false;
     let i = board.length-1;
     let fi = 0;
     while (i >= 0 && fi == 0) {
         if (board[i][col] == 0) {
             board[i][col] = currentPlayer;
+            changePlayer = true;
             fi = 1;
         } else if (i == 0 && board[i][col] != 0) {
             showAlert("info", "Alert! Invalid movement.");
@@ -107,7 +169,9 @@ function move(col) {
 
     let won = checkSolutionBoard();
 
-    currentPlayer = currentPlayer == 1? 2: 1;
+    if (changePlayer) {
+        currentPlayer = currentPlayer == 1? 2: 1;
+    }
 
     if (won != 0) {
         gameEnd = true;
@@ -116,10 +180,14 @@ function move(col) {
     insertBoard(board, player1, player2, currentPlayer);
 
     if (won != 0) {
-        playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
-        showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
-        modeDiscoActivated();
-    }
+        if (won == -1) {
+            showMsgCongratulations("Draw game!", "There was a draw in the game!", "info");
+        } else {
+            playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
+            showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
+            modeDiscoActivated();
+        }
+    } 
 }
 
 /* OTHER FUNCTIONS */
@@ -158,6 +226,10 @@ function checkSolutionBoard() {
         }
     }
 
+    if (wonGame == 0 && isDrawGame()) {
+        return -1;
+    }
+
     return wonGame;
 }
 
@@ -181,12 +253,16 @@ function buildBoard(board, p1, p2, currentP) {
     if (!gameEnd) { // if game not ending, build a header of table
         let prerow = document.createElement("tr");
 
-        for (i = 0; i < board.length; i++) {
+        for (let i = 0; i < board.length; i++) {
             let cell = document.createElement("th");
-            let btn = getButton(false, "V", "", "btnsBoard", `move(${i})`);
+            let btn = getButton(false, "V", "", "btnsBoard");
+            btn.addEventListener("click", () => { move(i); });
 
-            btn.style.backgroundColor = currentP == 1? p1.meColorIs(): p2.meColorIs();
-            btn.style.borderColor = currentP == 1? p1.meColorIs(): p2.meColorIs();
+            btn.style.backgroundColor = currentP == 1? p1.meChipsIs().getChip().style.backgroundColor: p2.meChipsIs().getChip().style.backgroundColor;
+            btn.style.color = currentP == 1? p1.meChipsIs().getChip().style.color: p2.meChipsIs().getChip().style.color;
+            btn.style.borderColor = currentP == 1? p1.meChipsIs().getChip().style.borderColor: p2.meChipsIs().getChip().style.borderColor;
+            btn.style.borderSize = currentP == 1? p1.meChipsIs().getChip().style.borderSize: p2.meChipsIs().getChip().style.borderSize;
+            btn.style.borderStyle = currentP == 1? p1.meChipsIs().getChip().style.borderStyle: p2.meChipsIs().getChip().style.borderStyle;
 
             cell.appendChild(btn);
 
@@ -197,31 +273,21 @@ function buildBoard(board, p1, p2, currentP) {
     }
 
     // build a board
-    for (i = 0; i < board.length; i++) {
+    for (let i = 0; i < board.length; i++) {
         let row = document.createElement("tr");
 
-        for (j = 0; j < board[i].length; j++) {
+        for (let j = 0; j < board[i].length; j++) {
             let cell = document.createElement("td");
 
-            let gameChips = document.createElement("span");
-            gameChips.setAttribute("class", "gameChips");
-            gameChips.innerText = "VV";
+            let gameChips = new Chip(getCssVar("--colorPrimary"), getCssVar("--colorPrimary"), "0px");
 
             if (board[i][j] == 1) {
-                gameChips.style.backgroundColor = p1.meColorIs();
-                gameChips.style.borderColor = p1.meColorIs();
-                gameChips.style.color = p1.meColorIs();
+                gameChips.setChip(p1.meChipsIs());
             } else if (board[i][j] == 2) {
-                gameChips.style.backgroundColor = p2.meColorIs();
-                gameChips.style.borderColor = p2.meColorIs();
-                gameChips.style.color = p2.meColorIs();
-            } else if (board[i][j] == 0) {
-                gameChips.style.backgroundColor = "white";
-                gameChips.style.borderColor = "white";
-                gameChips.style.color = "white";
+                gameChips.setChip(p2.meChipsIs());
             }
 
-            cell.appendChild(gameChips);
+            cell.appendChild(gameChips.getChip());
             row.appendChild(cell);
         }
 
@@ -229,49 +295,6 @@ function buildBoard(board, p1, p2, currentP) {
     }
 
     return table;
-}
-
-/*
-* getInput: build and return label and input in div
-*/
-function getInput(type, id, name, textLabel, value = "") {
-    let div = document.createElement("div");
-
-    let label = document.createElement("label");
-    label.setAttribute("for", id);
-    label.innerText = textLabel;
-
-    let input = document.createElement("input");
-    input.setAttribute("type", type);
-    input.setAttribute("id", id);
-    input.setAttribute("name", name);
-    input.setAttribute("value", value);
-
-    div.appendChild(label);
-    div.appendChild(input);
-
-    return div;
-}
-
-/*
-* getButton: build and return button in div
-*/
-function getButton(innnerDiv, textBtn, id = "", className = "", onClick = "") {
-    let div = document.createElement("div");
-
-    let button = document.createElement("button");
-    button.setAttribute("id", id);
-    button.setAttribute("class", className);
-    button.setAttribute("onClick", onClick);
-    button.innerText = textBtn;
-
-    if (innnerDiv) {
-        div.appendChild(button);
-
-        return div;
-    } else {
-        return button;
-    }
 }
 
 /*
@@ -292,10 +315,18 @@ function modeDiscoActivated() {
 }
 
 /*
-* setAnimation: set animation with name, duration and iteration count on the elem
+* isDrawGame: check the board and return true if none zeros
 */
-function setAnimation(elem, animationName = "", animationDuration = "", animationIterCount = "") {
-    elem.style.animationName = animationName;
-    elem.style.animationDuration = animationDuration;
-    elem.style.animationIterationCount = animationIterCount;
+function isDrawGame() {
+    let countZeros = 0;
+
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (board[i][j] == 0) {
+                countZeros = countZeros + 1;
+            }
+        }
+    }
+
+    return (countZeros == 0);
 }

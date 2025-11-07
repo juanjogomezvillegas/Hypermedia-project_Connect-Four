@@ -10,20 +10,18 @@
     --white: #ffffff;
     --gray: #7C7C7C;
     --lightGray: #D6D6D6;
-    --colorPrimary: #000C6A;
-    --colorSecundary: #0115A8;
-    --backgroudColorBody: #7BFFF6;
-    --textColorBody: #000000;
-    --colorDisco: #F000AC;
+    --colorPrimary: #0D0A0A;
+    --colorSecundary: #141414;
+    --textColor: var(--white);
 }
 
 /* CSS ANIMATIONS */
 
 /* Animation by change theme */
 @keyframes changeTheme {
-    0% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 0%);}
-    50% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 50%);}
-    100% {background: radial-gradient(circle, var(--colorDisco) 0%, var(--backgroudColorBody) 100%);}
+    0% {background: radial-gradient(circle, var(--colorPrimary) 0%, var(--colorSecundary) 0%);}
+    50% {background: radial-gradient(circle, var(--colorPrimary) 0%, var(--colorSecundary) 50%);}
+    100% {background: radial-gradient(circle, var(--colorPrimary) 0%, var(--colorSecundary) 100%);}
 }
 
 /* Animation by rotate elements */
@@ -34,8 +32,7 @@
 
 /* FOR ALL DEVICES */
 
-/* For all descendents of the elements
- * CSS Specificity = 0 */
+/* CSS Specificity = 0 */
 * {
     margin: 0;
     padding: 0;
@@ -43,130 +40,160 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* For body element
- * CSS Specificity = 1 */
+/* CSS Specificity = 1 */
 body {
-    background-color: var(--backgroudColorBody);
-    color: var(--textColorBody);
+    background-color: var(--colorPrimary);
+    color: var(--textColor);
 }
 
 /* FOR DESKTOP */
 
 /* header styles */
 
-header {
-    padding: 20px;
-    background-color: var(--colorPrimary);
-    color: var(--white);
-}
-
+/* CSS Specificity = 2 */
 header div {
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
-header div > button {
+/* CSS Specificity = 3 */
+header div > button#modeDisco {
     margin-right: 15px;
     border: 0px;
     background-color: var(--colorPrimary);
-    color: var(--white);
+    color: var(--textColor);
+}
+
+header div > button#changeTheme {
+    margin-right: 15px;
+    border: 0px;
+    background-color: var(--colorPrimary);
+    color: var(--textColor);
 }
 
 /* main container styles */
 
+/* CSS Specificity = 102 */
 div#container h2 {
     margin-top: 10px;
     padding: 10px;
     background-color: var(--colorSecundary);
-    color: var(--white);
+    color: var(--textColor);
 }
 
+/* CSS Specificity = 102 */
 div#container article {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px 100px 50px 100px;
 }
 
 /* init form */
 
+/* CSS Specificity = 103 */
 div#container article > div {
     margin: 10px;
 }
 
+/* CSS Specificity = 104 */
 div#container article > div label {
     margin-right: 10px;
 }
 
-div#container article > div input {
-    padding: 5px;
+/* CSS Specificity = 104 */
+div#container article > div input, div#container article > div select {
+    cursor: pointer;
+    padding: 10px;
     border: 1px solid var(--black);
-    border-radius: 3%;
-    background-color: var(--backgroudColorBody);
+    border-radius: 5px;
+    box-shadow: 3px 3px 0px var(--colorSecundary);
+    background-color: var(--colorPrimary);
+    color: var(--textColor);
+    transition: all 1s;
 }
 
-div#container article > div button {
+/* CSS Specificity = 114 */
+div#container article > div input:hover, div#container article > div select:hover {
+    box-shadow: 6px 6px 10px var(--colorSecundary);
+    background-color: var(--colorSecundary);
+    transition: all 1s;
+}
+
+/* CSS Specificity = 204 */
+div#container article > div button#btnPlay {
+    cursor: pointer;
     width: 200px;
     padding: 10px;
     border: 1px solid var(--black);
-    border-radius: 5%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 0px var(--colorSecundary);
     background-color: var(--colorPrimary);
-    color: var(--white);
-    font-weight: bold;
+    color: var(--textColor);
     transition: all .5s;
 }
 
-div#container article > div button:hover {
+/* CSS Specificity = 214 */
+div#container article > div button#btnPlay:hover {
+    box-shadow: 6px 6px 10px var(--colorSecundary);
     background-color: var(--colorSecundary);
-    border-radius: 50%;
     transition: all .5s;
 }
 
 /* board of game */
 
+/* CSS Specificity = 103 */
 div#container article table {
     width: 800px;
 }
 
+/* CSS Specificity = 105 */
 div#container article table tr > td {
     padding: 15px;
     text-align: center;
     border: 5px solid var(--colorSecundary);
 }
 
+/* CSS Specificity = 105 */
 div#container article table tr > th {
     padding: 10px;
 }
 
+/* CSS Specificity = 11 */
 button.btnsBoard {
+    cursor: pointer;
     width: 45px;
     padding: 10px;
-    border: 1px solid;
+    border: 1px solid var(--black);
     border-radius: 50%;
 }
 
+/* CSS Specificity = 11 */
 span.gameChips {
     width: 45px;
     padding: 10px;
-    border: 1px solid;
+    border: 1px solid var(--black);
     border-radius: 50%;
 }
 
 /* other styles */
 
+/* CSS Specificity = 1 */
 h1 {
     font-size: 30px;
     text-align: center;
 }
 
+/* CSS Specificity = 1 */
 h2 {
     font-size: 25px;
     text-align: center;
 }
 
+/* CSS Specificity = 11 */
 hr.line {
     margin: 25px 10px 25px 10px;
-    border: 2px solid var(--black);
+    border: 2px solid var(--colorSecundary);
 }
 
 @media only screen and (max-width: 860px) {
@@ -174,31 +201,36 @@ hr.line {
 
     /* board of game */
 
+    /* CSS Specificity = 103 */
     div#container article table {
         width: 100px;
     }
 
+    /* CSS Specificity = 105 */
     div#container article table tr > td {
         padding: 5px;
         text-align: center;
         border: 5px solid var(--colorSecundary);
     }
 
+    /* CSS Specificity = 105 */
     div#container article table tr > th {
         padding: 5px;
     }
 
+    /* CSS Specificity = 11 */
     button.btnsBoard {
         width: 30px;
         padding: 2px;
-        border: 1px solid;
+        border: 1px solid var(--black);
         border-radius: 50%;
     }
 
+    /* CSS Specificity = 11 */
     span.gameChips {
         width: 30px;
         padding: 2px;
-        border: 1px solid;
+        border: 1px solid var(--black);
         border-radius: 50%;
     }
 }
