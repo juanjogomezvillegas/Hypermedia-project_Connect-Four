@@ -7,6 +7,13 @@
 /* FUNCTIONS */
 
 /*
+* genRandomNumber: generate random number between min and max (both included)
+*/
+function genRandomNumber(min, max) {
+    return Math.round(Math.random() * (max - min + 1) + min);
+}
+
+/*
 * getInput: build and return label and input in optional div
 */
 function getInput(innerDiv, type, name = "", id = "", placeholder = "", className = "", textLabel = "", value = "") {

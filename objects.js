@@ -46,10 +46,12 @@ class Player {
     // privates attributes
     #name;
     #chips;
+    #isRobot;
     // constructor
-    constructor(name, chips) {
+    constructor(name, chips, isRobot = false) {
         this.#name = name;
         this.#chips = chips;
+        this.#isRobot = isRobot;
     }
     // public methods without any parameters
     meNameIs() {
@@ -57,6 +59,9 @@ class Player {
     }
     meChipsIs() {
         return this.#chips;
+    }
+    isRobot() {
+        return this.#isRobot;
     }
 }
 

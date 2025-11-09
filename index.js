@@ -9,7 +9,8 @@
 const listChips = [new Pair("red", new Chip("#ff6363", "#ff0000")), 
                    new Pair("yellow", new Chip("#ffff63", "#ffff00")), 
                    new Pair("blue", new Chip("#6363ff", "#0000ff")), 
-                   new Pair("green", new Chip("#63ff63", "#00ff00"))];
+                   new Pair("green", new Chip("#63ff63", "#00ff00")), 
+                   new Pair("green", new Chip("#63ffff", "#00ffff"))];
 
 /* GLOBAL VARIABLES */
 
@@ -94,11 +95,12 @@ function establishTheme() {
 * gameInit: before start a game
 */
 function gameInit() {
-    let p1 = document.getElementById("inPlayer1").value;
-    let p2 = document.getElementById("inPlayer2").value;
     let colp1 = document.getElementById("inColorPlayer1").value;
     let colp2 = document.getElementById("inColorPlayer2").value;
+    let typp2 = document.getElementById("inTypePlayer2").value;
     let boardSize = document.getElementById("inNumRowsCols").value;
+    let p1 = document.getElementById("inPlayer1").value;
+    let p2 = typp2 == "1"? "Computer": document.getElementById("inPlayer2").value;
 
     if (p1 === "" || p2 === "" || boardSize === "") {
         showAlert("error", "Error! Some field is empty.");
@@ -110,7 +112,7 @@ function gameInit() {
         showAlert("error", "Error! Board size must be between 4 and 9.");
     } else {
         player1 = new Player(p1, listChips[colp1].second());
-        player2 = new Player(p2, listChips[colp2].second());
+        player2 = p2 == "Computer"? new Player(p2, listChips[colp2].second(), true): new Player(p2, listChips[colp2].second());
         currentPlayer = 1;
         
         board = [];
@@ -145,6 +147,8 @@ function formInit() {
 
     middleSection.appendChild(document.createElement("br"));
 
+    middleSection.appendChild(getSelect(true, "inTypePlayer2", "inTypePlayer2", "", "Type Player 2", ["human","computer"]));
+
     middleSection.appendChild(getInput(true, "text", "inPlayer2", "inPlayer2", "Name player 2", "", "Name player 2"));
     
     middleSection.appendChild(getSelect(true, "inColorPlayer2", "inColorPlayer2", "", "Color player 2", listChipsfst));
@@ -159,9 +163,21 @@ function formInit() {
 }
 
 /*
-* move: make a move one of the two players
+* move: make a move one of the two humans or robots players
 */
 function move(col) {
+    moved(col);
+
+    if (currentPlayer == 2 && player2.isRobot()) {
+        moved(genRandomNumber(0,board.length-1));
+    }
+}
+
+/*
+* moved: make a moved one of the two players
+*/
+function moved(col) {
+    let robotError = false;
     let changePlayer = false;
     let i = board.length-1;
     let fi = 0;
@@ -171,33 +187,39 @@ function move(col) {
             changePlayer = true;
             fi = 1;
         } else if (i == 0 && board[i][col] != 0) {
-            showAlert("info", "Alert! Invalid movement.");
+            if (!(currentPlayer == 2 && player2.isRobot())) {
+                robotError = true;
+            } else {
+                showAlert("info", "Alert! Invalid movement.");
+            }
             fi = 1;
         }
         i--;
     }
 
-    let won = checkSolutionBoard();
+    if (!robotError) {
+        let won = checkSolutionBoard();
 
-    if (changePlayer) {
-        currentPlayer = currentPlayer == 1? 2: 1;
-    }
-
-    if (won != 0) {
-        gameEnd = true;
-    }
-
-    insertBoard(board, player1, player2, currentPlayer);
-
-    if (won != 0) {
-        if (won == -1) {
-            showMsgCongratulations("Draw game!", "There was a draw in the game!", "info");
-        } else {
-            playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
-            showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
-            modeDiscoActivated();
+        if (changePlayer) {
+            currentPlayer = currentPlayer == 1? 2: 1;
         }
-    } 
+
+        if (won != 0) {
+            gameEnd = true;
+        }
+
+        insertBoard(board, player1, player2, currentPlayer);
+
+        if (won != 0) {
+            if (won == -1) {
+                showMsgCongratulations("Draw game!", "There was a draw in the game!", "info");
+            } else {
+                playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
+                showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
+                modeDiscoActivated();
+            }
+        }
+    }
 }
 
 /* OTHER FUNCTIONS */
