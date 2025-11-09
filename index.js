@@ -10,7 +10,7 @@ const listChips = [new Pair("red", new Chip("#ff6363", "#ff0000")),
                    new Pair("yellow", new Chip("#ffff63", "#ffff00")), 
                    new Pair("blue", new Chip("#6363ff", "#0000ff")), 
                    new Pair("green", new Chip("#63ff63", "#00ff00")), 
-                   new Pair("green", new Chip("#63ffff", "#00ffff"))];
+                   new Pair("cyan", new Chip("#63ffff", "#00ffff"))];
 
 /* GLOBAL VARIABLES */
 
