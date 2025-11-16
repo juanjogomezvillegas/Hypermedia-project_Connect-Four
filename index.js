@@ -36,6 +36,7 @@ window.onload = () => {
     document.getElementById("btnPlay").addEventListener("click", gameInit);
     document.getElementById("changeTheme").addEventListener("click", changeTheme);
     document.getElementById("modeDisco").addEventListener("click", modeDiscoActivated);
+    document.getElementById("btnStartGame").addEventListener("click", () => {location.reload()});
 }
 
 /* MAIN FUNCTIONS */
@@ -95,6 +96,8 @@ function establishTheme() {
 * gameInit: before start a game
 */
 function gameInit() {
+    document.getElementById("btnStartGame").style.visibility = "hidden";
+
     let colp1 = document.getElementById("inColorPlayer1").value;
     let colp2 = document.getElementById("inColorPlayer2").value;
     let typp2 = document.getElementById("inTypePlayer2").value;
@@ -218,6 +221,7 @@ function moved(col) {
                 showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
                 modeDiscoActivated();
             }
+            document.getElementById("btnStartGame").style.visibility = "visible";
         }
     }
 }

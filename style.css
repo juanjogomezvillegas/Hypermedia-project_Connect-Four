@@ -59,6 +59,7 @@ header div {
 
 /* CSS Specificity = 3 */
 header div > button#modeDisco {
+    cursor: pointer;
     margin-right: 15px;
     border: 0px;
     background-color: var(--colorPrimary);
@@ -66,6 +67,7 @@ header div > button#modeDisco {
 }
 
 header div > button#changeTheme {
+    cursor: pointer;
     margin-right: 15px;
     border: 0px;
     background-color: var(--colorPrimary);
@@ -161,7 +163,7 @@ div#container article table tr > th {
 
 /* CSS Specificity = 11 */
 button.btnsBoard {
-    cursor: pointer;
+    cursor: crosshair;
     width: 45px;
     padding: 10px;
     border: 1px solid var(--black);
@@ -170,6 +172,7 @@ button.btnsBoard {
 
 /* CSS Specificity = 11 */
 span.gameChips {
+    cursor: default;
     width: 45px;
     padding: 10px;
     border: 1px solid var(--black);
@@ -194,6 +197,35 @@ h2 {
 hr.line {
     margin: 25px 10px 25px 10px;
     border: 2px solid var(--colorSecundary);
+}
+
+/* CSS Specificity = 101 */
+div#btnStartGame {
+    visibility: hidden;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    z-index: 3;
+}
+
+/* CSS Specificity = 101 */
+button#startNewGame {
+    padding: 20px;
+    cursor: pointer;
+    border: 1px solid var(--black);
+    border-radius: 3px;
+    background-color: var(--white);
+    box-shadow: 3px 3px 0px var(--colorSecundary);
+    color: var(--black);
+    transition: all .5s;
+}
+
+/* CSS Specificity = 111 */
+button#startNewGame:hover {
+    transition: all .5s;
+    border-radius: 5px;
+    background-color: var(--gray);
+    box-shadow: 6px 6px 10px var(--colorSecundary);
 }
 
 @media only screen and (max-width: 860px) {
@@ -232,5 +264,14 @@ hr.line {
         padding: 2px;
         border: 1px solid var(--black);
         border-radius: 50%;
+    }
+
+    /* CSS Specificity = 101 */
+    div#btnStartGame {
+        visibility: hidden;
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        z-index: 3;
     }
 }
