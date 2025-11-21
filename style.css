@@ -235,6 +235,21 @@ button#startNewGame:hover {
     box-shadow: 6px 6px 10px var(--colorSecundary);
 }
 
+/* CSS Specificity = 1 */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+
+/* CSS Specificity = 2 */
+footer > div {
+    cursor: default;
+    text-align: center;
+}
+
+/* CSS Specificity = 100+100+100 */
 #audioBlip, #audioBlipBoomError, #audioBlipDisco {
     display: none;
 }
