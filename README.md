@@ -40,11 +40,15 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
     - **utils.js**. contains functions that are used in different parts of the index.js code, related to the generate random number between min and max, build a button, input and select in a div or not, with label or not. Also there is a functions by set css animation with name, duration and iteration count on the element, and a return and change value of the css variable.
 
-### External libraries
+### External libraries or web pages
 
 - [sweetalert2](https://sweetalert2.github.io/), by show alert messages with a different style that alert js.
 
 - [font awesome](https://fontawesome.com/icons), by insert icons in a web page.
+
+- [www.bfxr.net](https://www.bfxr.net/), by generate audio.
+
+- [paletton.com](https://paletton.com/#uid=11T0u0k++GYveZKT0+V+Vs++amG), by generate color pallette.
 
 ## Link to the website
 

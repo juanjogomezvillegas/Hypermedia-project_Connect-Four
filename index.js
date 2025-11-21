@@ -22,6 +22,10 @@ let maxTheme = 6;
 let currentTheme;
 let gameEnd = false;
 let modeDisco = false;
+// multimedia elements
+let blip;
+let blipError;
+let blipDisco;
 
 /* PRINCIPAL EVENTS */
 
@@ -32,6 +36,11 @@ window.onload = () => {
     document.getElementById("changeTheme").innerHTML = currentTheme;
     establishTheme();
     formInit();
+
+    // multimedia elements
+    blip = document.getElementById("audioBlip");
+    blipError = document.getElementById("audioBlipBoomError");
+    blipDisco = document.getElementById("audioBlipDisco");
 
     document.getElementById("btnPlay").addEventListener("click", gameInit);
     document.getElementById("changeTheme").addEventListener("click", changeTheme);
@@ -45,6 +54,8 @@ window.onload = () => {
 * changeTheme: change theme of the web page
 */
 function changeTheme(e) {
+    blip.play();
+
     // update theme
     currentTheme = currentTheme == maxTheme? 1: parseInt(currentTheme) + 1;
     e.target.innerHTML = currentTheme;
@@ -106,14 +117,20 @@ function gameInit() {
     let p2 = typp2 == "1"? "Computer": document.getElementById("inPlayer2").value;
 
     if (p1 === "" || p2 === "" || boardSize === "") {
+        blipError.play();   
         showAlert("error", "Error! Some field is empty.");
     } else if (p1 == p2) {
+        blipError.play();
         showAlert("error", "Error! Names player 1 and 2 is equal.");
     } else if (colp1 == colp2) {
+        blipError.play();
         showAlert("error", "Error! Colors player 1 and 2 is equal.");
     } else if (boardSize < 4 || boardSize >= 10) {
+        blipError.play();
         showAlert("error", "Error! Board size must be between 4 and 9.");
     } else {
+        blip.play();
+
         player1 = new Player(p1, listChips[colp1].second());
         player2 = p2 == "Computer"? new Player(p2, listChips[colp2].second(), true): new Player(p2, listChips[colp2].second());
         currentPlayer = 1;
@@ -169,6 +186,8 @@ function formInit() {
 * move: make a move one of the two humans or robots players
 */
 function move(col) {
+    blip.play();
+
     moved(col);
 
     if (currentPlayer == 2 && player2.isRobot()) {
@@ -193,6 +212,7 @@ function moved(col) {
             if (!(currentPlayer == 2 && player2.isRobot())) {
                 robotError = true;
             } else {
+                blipError.play();
                 showAlert("info", "Alert! Invalid movement.");
             }
             fi = 1;
@@ -357,10 +377,12 @@ function modeDiscoActivated() {
     let body = document.body;
 
     if (!modeDisco) {
+        blipDisco.play();
         setAnimation(body, "changeTheme", ".3s", "infinite");
         modeDisco = true;
         document.getElementById("modeDisco").innerHTML = "<i class=\"fa fa-pause\"></i>";
     } else {
+        blipDisco.pause();
         setAnimation(body);
         modeDisco = false;
         document.getElementById("modeDisco").innerHTML = "<i class=\"fa fa-play\"></i>";

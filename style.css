@@ -228,6 +228,10 @@ button#startNewGame:hover {
     box-shadow: 6px 6px 10px var(--colorSecundary);
 }
 
+#audioBlip, #audioBlipBoomError, #audioBlipDisco {
+    display: none;
+}
+
 @media only screen and (max-width: 860px) {
     /* FOR MOBILE PHONE */
 
