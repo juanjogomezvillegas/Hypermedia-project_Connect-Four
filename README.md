@@ -8,7 +8,7 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 ### Available functionalities
 
-- **The main functionality**, the easy initial form and the game engine.
+- **The main functionality**, the easy initial form and the game engine, and the page with a board the game with buttons in every column the board. A player 1 select a column between 0 and board size - 1, appears a chip in selected column and last free row, then it's player 2 turn. And then it repeats itself again, until they match a four chips in columns, row or diagonals (left or right).
 
 - **The avaiable a one player can play against the computer**, in a select to the init form the user can select to the computer, and by click to the button Play, the player 1 (the user) will play against the computer. The computer will play by making random moves between 0 and the board size - 1.
 
@@ -18,7 +18,7 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - **The font family by default is a Seven Segments, Arial, Sans-Serif**. 
 
-- **Every time the user clicks a button or gets an error, a audio plays.**.
+- **Every time the user clicks a button or gets an error, a audio plays**.
 
 ### Code structure in different files
 
