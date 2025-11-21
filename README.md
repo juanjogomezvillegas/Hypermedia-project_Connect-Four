@@ -18,11 +18,11 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - html files:
 
-    - **index.html**. 
+    - **index.html**. html code related to the web page static structure, that will it be modify with the DOM.
 
 - stylesheets css files
 
-    - **style.css**. 
+    - **style.css**. Place where it is defined a stylesheets for mobile phone, for desktop, and for all devices (tag body), and a keyframes of animation, and a declarates css variables.
 
 - code js files
 
@@ -40,6 +40,16 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
     - **utils.js**. contains functions that are used in different parts of the index.js code, related to the generate random number between min and max, build a button, input and select in a div or not, with label or not. Also there is a functions by set css animation with name, duration and iteration count on the element, and a return and change value of the css variable.
 
+### External libraries
+
+- [sweetalert2](https://sweetalert2.github.io/), by show alert messages with a different style that alert js.
+
+- [font awesome](https://fontawesome.com/icons), by insert icons in a web page.
+
 ## Link to the website
 
 - [Link to the website](https://juanjogomezvillegas.github.io/Hypermedia-project.Connect-Four/)
+
+# Abbreviations
+
+*[DOM]: Document Object Model
