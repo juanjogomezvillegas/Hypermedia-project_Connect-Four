@@ -31,6 +31,7 @@ function getInput(innerDiv, type, name = "", id = "", placeholder = "", classNam
     input.className = className;
     input.value = value;
     input.placeholder = placeholder;
+    input.title = textLabel;
 
     if (innerDiv) {
         div.appendChild(label);
@@ -56,6 +57,7 @@ function getSelect(innerDiv, name = "", id = "", className = "", textLabel = "",
     select.name = name;
     select.id = id;
     select.className = className;
+    select.title = textLabel;
 
     options.map((val,ind) => {
         let opt = document.createElement("option");
@@ -84,6 +86,7 @@ function getButton(innerDiv, textBtn, id = "", className = "", onClick = "") {
     button.className = className;
     button.onClick = onClick;
     button.innerText = textBtn;
+    button.title = textBtn;
 
     if (innerDiv) {
         div.appendChild(button);

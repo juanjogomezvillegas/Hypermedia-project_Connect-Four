@@ -4,6 +4,13 @@
  * Description: Project 1. CV, stylesheets file
 */
 
+/* MORE FONTS FAMILY */
+
+@font-face {
+    font-family: SevenSegments;
+    src: url(fonts/SevenSegments.ttf);
+}
+
 /* CSS VARIABLES */
 :root {
     --black: #000000;
@@ -37,7 +44,7 @@
     margin: 0;
     padding: 0;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: SevenSegments, Arial, Helvetica, sans-serif;
 }
 
 /* CSS Specificity = 1 */
