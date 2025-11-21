@@ -18,7 +18,7 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - html files:
 
-    - **index.html**. html code related to the web page static structure, that will it be modify with the DOM.
+    - **index.html**. html code related to the web page static structure, that will it be modify with the <abbr title="Document Object Model">DOM</abbr>.
 
 - stylesheets css files
 
@@ -49,7 +49,3 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 ## Link to the website
 
 - [Link to the website](https://juanjogomezvillegas.github.io/Hypermedia-project.Connect-Four/)
-
-# Abbreviations
-
-*[DOM]: Document Object Model
