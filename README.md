@@ -4,21 +4,41 @@
 
 Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
-## Project analysis
+## Information related to the implementation
 
-### User profile
+### Available functionalities
 
-- create a user persona for your website.
+- **The main functionality**, the easy initial form and the game engine.
 
-**Juan José Gómez**, 24 years old, is a computer science engineering student, and she enjoys modern design and seeks user-friendly interfaces and understand.
+- **Disco mode**, a button in header.
 
-### Information architecture
+- **Change colors theme**, a button in header.
 
-- describe using around 200 words (minimum) how you have distributed the page's information.
+### Code structure in different files
 
-### Visual design
+- html files:
 
-- describe using around 200 words (minimum) the main decisions you have made for the visual design.
+    - **index.html**. 
+
+- stylesheets css files
+
+    - **style.css**. 
+
+- code js files
+
+    - **index.js**. 
+
+    - **message.js**. This is where the implements a two functions: ShowMsgCongratulations, that makes appears in the window a alert message using the library js sweetalert2 with title, text and icon; showAlert, that makes appears a toast message in top end of the window during 2 seconds using the library js sweetalert2 with title and icon.
+
+    - **objects.js**. This is where the different objects are created, that are used in index.js:
+    
+        - Object Chip(backgroundColor, borderColor, borderSize, borderStyle), related to the game chips, contains a information of the game chips.
+        
+        - Object Player(name, chips), related to the game players, contains a information of the players.
+        
+        - Object Pair(first, second), is object that contains a two elements (first and second), used in different parts of the code.
+
+    - **utils.js**. contains functions that are used in different parts of the index.js code, related to the generate random number between min and max, build a button, input and select in a div or not, with label or not. Also there is a functions by set css animation with name, duration and iteration count on the element, and a return and change value of the css variable.
 
 ## Link to the website
 
