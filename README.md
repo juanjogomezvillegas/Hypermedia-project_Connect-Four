@@ -18,7 +18,7 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - html files:
 
-    - **index.html**. html code related to the web page static structure, that will it be modify with the <abbr title="Document Object Model">DOM</abbr>.
+    - **index.html**. html code related to the web page static structure, that will it be modify with the DOM (Document Object Model).
 
 - stylesheets css files
 
@@ -26,7 +26,7 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - code js files
 
-    - **index.js**. 
+    - **index.js**. Place where all the game engine code, DOM code by manipulation of the web page structure, and other functionalities code.
 
     - **message.js**. This is where the implements a two functions: ShowMsgCongratulations, that makes appears in the window a alert message using the library js sweetalert2 with title, text and icon; showAlert, that makes appears a toast message in top end of the window during 2 seconds using the library js sweetalert2 with title and icon.
 
