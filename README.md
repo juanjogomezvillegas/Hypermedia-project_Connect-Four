@@ -10,9 +10,15 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - **The main functionality**, the easy initial form and the game engine.
 
-- **Disco mode**, a button in header.
+- **The avaiable a one player can play against the computer**, in a select to the init form the user can select to the computer, and by click to the button Play, the player 1 (the user) will play against the computer. The computer will play by making random moves between 0 and the board size - 1.
 
-- **Change colors theme**, a button in header.
+- **Disco mode**, a button in header that active/disactive a css animation that change colors theme every second with by background music.
+
+- **Change colors theme**, a button in header that change colors theme, each theme is identified with number, that change with the colors, the numbers is: 1, black theme (#0D0A0A and #141414); 2, dark blue theme (#00023D and #00035F); 3, blood theme (#3F0000 and #650000); 4, dark purple theme (#38003E and #54005D); 5, dark yelow theme (#5B4500 and #826200); 6, dark green theme (#085200 and #097100).
+
+- **The font family by default is a Seven Segments, Arial, Sans-Serif**. 
+
+- **Every time the user clicks a button or gets an error, a audio plays.**.
 
 ### Code structure in different files
 
@@ -46,10 +52,14 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - [font awesome](https://fontawesome.com/icons), by insert icons in a web page.
 
-- [www.bfxr.net](https://www.bfxr.net/), by generate audio.
+- [www.bfxr.net](https://www.bfxr.net/), by generate audio files in wav format.
 
 - [paletton.com](https://paletton.com/#uid=11T0u0k++GYveZKT0+V+Vs++amG), by generate color pallette.
 
 ## Link to the website
 
 - [Link to the website](https://juanjogomezvillegas.github.io/Hypermedia-project.Connect-Four/)
+
+## Link to the code
+
+- [Link to the code](https://github.com/juanjogomezvillegas/Hypermedia-project.Connect-Four)
