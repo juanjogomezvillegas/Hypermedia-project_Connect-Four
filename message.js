@@ -22,6 +22,9 @@ const Toast = Swal.mixin({
 
 /*
 * showMsgCongratulations: show a message congratulations, reporting the name of the winning player
+* 
+* return:
+*   void
 */
 function showMsgCongratulations(title, text, icon) {
     Swal.fire({
@@ -34,6 +37,9 @@ function showMsgCongratulations(title, text, icon) {
 
 /*
 * showAlert: show a toast alert in case of error
+* 
+* return:
+*   void
 */
 function showAlert(icon, title) {
     Toast.fire({

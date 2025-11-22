@@ -31,9 +31,12 @@ let blipDisco;
 /* PRINCIPAL EVENTS */
 
 window.onload = () => {
+    // title and favicon
     document.title = "Connect Four";
     document.getElementById("faviconPage").href = "./images/img1.jpg";
+    // storage theme in local storage
     currentTheme = localStorage.getItem("currentTheme")? localStorage.getItem("currentTheme"): 1;
+    // establish a current theme and build init form
     document.getElementById("changeTheme").innerHTML = currentTheme;
     establishTheme();
     formInit();
@@ -43,6 +46,7 @@ window.onload = () => {
     blipError = document.getElementById("audioBlipBoomError");
     blipDisco = document.getElementById("audioBlipDisco");
 
+    // events
     document.getElementById("btnPlay").addEventListener("click", gameInit);
     document.getElementById("changeTheme").addEventListener("click", changeTheme);
     document.getElementById("modeDisco").addEventListener("click", modeDiscoActivated);
@@ -53,6 +57,9 @@ window.onload = () => {
 
 /*
 * changeTheme: change theme of the web page
+* 
+* return:
+*   void
 */
 function changeTheme(e) {
     blip.play();
@@ -60,43 +67,48 @@ function changeTheme(e) {
     // update theme
     currentTheme = currentTheme == maxTheme? 1: parseInt(currentTheme) + 1;
     e.target.innerHTML = currentTheme;
+    // storage theme in local storage
     localStorage.removeItem("currentTheme");
     localStorage.setItem("currentTheme", currentTheme);
+
     establishTheme();
 }
 
 /*
 * establishTheme: established current theme of the web page
+* 
+* return:
+*   void
 */
 function establishTheme() {
     // establish new theme
     switch (parseInt(currentTheme)) {
-        case 1:
+        case 1: // black theme
             setCssVar("--colorPrimary", "#0D0A0A");
             setCssVar("--colorSecundary", "#141414");
             setCssVar("--textColor", getCssVar("--white"));
             break;
-        case 2:
+        case 2: // dark blue theme
             setCssVar("--colorPrimary", "#00023D");
             setCssVar("--colorSecundary", "#00035F");
             setCssVar("--textColor", getCssVar("--white"));
             break;
-        case 3:
+        case 3: // dark blood theme
             setCssVar("--colorPrimary", "#3F0000");
             setCssVar("--colorSecundary", "#650000");
             setCssVar("--textColor", getCssVar("--white"));
             break;
-        case 4:
+        case 4: // dark purple theme
             setCssVar("--colorPrimary", "#38003E");
             setCssVar("--colorSecundary", "#54005D");
             setCssVar("--textColor", getCssVar("--white"));
             break;
-        case 5:
+        case 5: // dark yelow theme
             setCssVar("--colorPrimary", "#5B4500");
             setCssVar("--colorSecundary", "#826200");
             setCssVar("--textColor", getCssVar("--white"));
             break;
-        case 6:
+        case 6: // dark green theme
             setCssVar("--colorPrimary", "#085200");
             setCssVar("--colorSecundary", "#097100");
             setCssVar("--textColor", getCssVar("--white"));
@@ -106,6 +118,9 @@ function establishTheme() {
 
 /*
 * gameInit: before start a game
+* 
+* return:
+*   void
 */
 function gameInit() {
     document.getElementById("btnStartGame").style.visibility = "hidden";
@@ -117,25 +132,27 @@ function gameInit() {
     let p1 = document.getElementById("inPlayer1").value;
     let p2 = typp2 == "1"? "Computer": document.getElementById("inPlayer2").value;
 
-    if (p1 === "" || p2 === "" || boardSize === "") {
+    if (p1 === "" || p2 === "" || boardSize === "") { // if some field is empty
         blipError.play();   
         showAlert("error", "Error! Some field is empty.");
-    } else if (p1 == p2) {
+    } else if (p1 == p2) { // if names players is equals
         blipError.play();
         showAlert("error", "Error! Names player 1 and 2 is equal.");
-    } else if (colp1 == colp2) {
+    } else if (colp1 == colp2) { // if colors players is equals
         blipError.play();
         showAlert("error", "Error! Colors player 1 and 2 is equal.");
-    } else if (boardSize < 4 || boardSize >= 10) {
+    } else if (boardSize < 4 || boardSize >= 10) { // if size board not is a correct value
         blipError.play();
         showAlert("error", "Error! Board size must be between 4 and 9.");
-    } else {
+    } else { // if init form correct
         blip.play();
 
+        // create a players, and establish to current player the player one
         player1 = new Player(p1, listChips[colp1].second());
         player2 = p2 == "Computer"? new Player(p2, listChips[colp2].second(), true): new Player(p2, listChips[colp2].second());
         currentPlayer = 1;
         
+        // build a board
         board = [];
         for (i = 0; i < boardSize; i++) {
             board[i] = new Array(boardSize);
@@ -144,6 +161,7 @@ function gameInit() {
             }
         }
 
+        // build a array that relative to cols not empty
         colsNotFree = new Array(boardSize);
         for (i = 0; i < boardSize; i++) {
             colsNotFree[i] = 0;
@@ -151,21 +169,29 @@ function gameInit() {
 
         gameEnd = false;
 
+        // build board game
         insertBoard(board, player1, player2, currentPlayer);
     }
 }
 
 /*
 * formInit: build a initial form before the start a game
+* 
+* return:
+*   void
 */
 function formInit() {
+    // change subtitle
     document.getElementById("subtitle").innerText = "Player Information";
     let middleSection = document.getElementById("middle");
 
+    // list the colors avaiables
     let listChipsfst = [];
     listChips.map((val) => {
         listChipsfst.push(val.first());
     });
+
+    // adds a inputs, selects, buttons and other elements (br), in order that appears in window
 
     middleSection.appendChild(getInput(true, "text", "inPlayer1", "inPlayer1", "Name player 1", "", "Name player 1"));
 
@@ -190,6 +216,9 @@ function formInit() {
 
 /*
 * move: make a move one of the two humans or robots players
+* 
+* return:
+*   void
 */
 function move(col) {
     blip.play();
@@ -251,11 +280,12 @@ function moved(col) {
     let moveError = false;
     let i = board.length-1;
     let fi = 0;
-    while (i >= 0 && fi == 0) {
-        if (board[i][col] == 0) {
+    
+    while (i >= 0 && fi == 0) { // iterate the board
+        if (board[i][col] == 0) { // make a move, valid movement
             board[i][col] = currentPlayer;
             fi = 1;
-        } else if (i == 0 && board[i][col] != 0) {
+        } else if (i == 0 && board[i][col] != 0) { // if selected col not free, invalid movement
             moveError = true;
             colsNotFree[col] = 1;
             fi = 1;
@@ -270,6 +300,12 @@ function moved(col) {
 
 /*
 * checkSolutionBoard: check a player won in the actually board
+* 
+* return:
+*   -1 there is not winner and there is draw game
+*    0 there is not winner and not draw game
+*    1 the winner is player 1
+*    2 the winner is player 2
 */
 function checkSolutionBoard() {
     let wonGame = 0;
@@ -328,17 +364,25 @@ function checkSolutionBoard() {
 
 /*
 * insertBoard: build and insert a board in a div
+* 
+* return:
+*   void
 */
 function insertBoard(board, p1, p2, currentP) {
+    // change subtitle
     document.getElementById("subtitle").innerText = `Score: ${ p1.meNameIs() } o - o ${ p2.meNameIs() }`;
     
     let middleSection = document.getElementById("middle");
+    // render a board game
     middleSection.innerHTML = "";
     middleSection.appendChild(buildBoard(board, p1, p2, currentP));
 }
 
 /*
 * buildBoard: build a board of game
+* 
+* return:
+*   table element
 */
 function buildBoard(board, p1, p2, currentP) {
     let table = document.createElement("table");
@@ -392,16 +436,19 @@ function buildBoard(board, p1, p2, currentP) {
 
 /*
 * modeDiscoActivated: activation css animation that simulate a disco
+* 
+* return:
+*   void
 */
 function modeDiscoActivated() {
     let body = document.body;
 
-    if (!modeDisco) {
+    if (!modeDisco) { // active mode disco
         blipDisco.play();
         setAnimation(body, "changeTheme", ".3s", "infinite");
         modeDisco = true;
         document.getElementById("modeDisco").innerHTML = "<i class=\"fa fa-pause\"></i>";
-    } else {
+    } else { // disactive mode disco
         blipDisco.pause();
         setAnimation(body);
         modeDisco = false;
@@ -411,10 +458,15 @@ function modeDiscoActivated() {
 
 /*
 * isDrawGame: check the board and return true if none zeros
+* 
+* return:
+*   0  there is free space in the board
+*   >0 there is not free space in the board
 */
 function isDrawGame() {
     let countZeros = 0;
 
+    // count the zeros in board game, if none zeros, then not free space in a board
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             if (board[i][j] == 0) {
@@ -425,5 +477,3 @@ function isDrawGame() {
 
     return (countZeros == 0);
 }
-
-/* FUNCTIONS IN COMPUTER PLAYER */
