@@ -12,9 +12,9 @@ Juan José Gómez Villegas (u1987338@campus.udg.edu)
 
 - **The avaiable a one player can play against the computer**, in a select to the init form the user can select to the computer, and by click to the button Play, the player 1 (the user) will play against the computer. The computer will play by making random moves between 0 and the board size - 1.
 
-- **Disco mode**, a button in header that active/disactive a css animation that change colors theme every second with by background music.
+- **Disco mode**, *icon the play*, a button in header that active/disactive a css animation that change colors theme every second with by background music.
 
-- **Change colors theme**, a button in header that change colors theme, each theme is identified with number, that change with the colors, the numbers is: 1, black theme (#0D0A0A and #141414); 2, dark blue theme (#00023D and #00035F); 3, blood theme (#3F0000 and #650000); 4, dark purple theme (#38003E and #54005D); 5, dark yelow theme (#5B4500 and #826200); 6, dark green theme (#085200 and #097100).
+- **Change colors theme**, *icon the number between 1 and 6*, a button in header that change colors theme, each theme is identified with number, that change with the colors, the numbers is: 1, black theme (#0D0A0A and #141414); 2, dark blue theme (#00023D and #00035F); 3, blood theme (#3F0000 and #650000); 4, dark purple theme (#38003E and #54005D); 5, dark yelow theme (#5B4500 and #826200); 6, dark green theme (#085200 and #097100).
 
 - **The font family by default is a Seven Segments, Arial, Sans-Serif**. 
 
