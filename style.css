@@ -43,7 +43,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 23px;
     font-family: SevenSegments, Arial, Helvetica, sans-serif;
 }
 
@@ -161,11 +161,13 @@ div#container article table tr > td {
     padding: 15px;
     text-align: center;
     border: 5px solid var(--colorSecundary);
+    font-size: 20px;
 }
 
 /* CSS Specificity = 105 */
 div#container article table tr > th {
     padding: 10px;
+    font-size: 20px;
 }
 
 /* CSS Specificity = 11 */
@@ -190,13 +192,13 @@ span.gameChips {
 
 /* CSS Specificity = 1 */
 h1 {
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;
 }
 
 /* CSS Specificity = 1 */
 h2 {
-    font-size: 25px;
+    font-size: 35px;
     text-align: center;
 }
 
@@ -241,6 +243,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 50px;
+    margin-top: 25px;
 }
 
 /* CSS Specificity = 2 */
@@ -299,5 +302,14 @@ footer > div {
         top: 30%;
         left: 30%;
         z-index: 3;
+    }
+
+    /* CSS Specificity = 1 */
+    footer {
+        position: static;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        margin-top: 25px;
     }
 }

@@ -15,6 +15,7 @@ const listChips = [new Pair("red", new Chip("#ff6363", "#ff0000")),
 /* GLOBAL VARIABLES */
 
 let board;
+let colsNotFree;
 let player1;
 let player2;
 let currentPlayer;
@@ -143,6 +144,11 @@ function gameInit() {
             }
         }
 
+        colsNotFree = new Array(boardSize);
+        for (i = 0; i < boardSize; i++) {
+            colsNotFree[i] = 0;
+        }
+
         gameEnd = false;
 
         insertBoard(board, player1, player2, currentPlayer);
@@ -188,62 +194,76 @@ function formInit() {
 function move(col) {
     blip.play();
 
-    moved(col);
+    let result;
 
-    if (currentPlayer == 2 && player2.isRobot()) {
-        moved(genRandomNumber(0,board.length-1));
+    if (currentPlayer == 2 && player2.isRobot()) { // if is a player two and player two is a robot
+        // call a function moved, while result != -1 (while movement invalid)
+        let colRobot;
+        do {
+            colRobot = genRandomNumber(0,board.length-1);
+        } while(colsNotFree[colRobot] == 1);
+        
+        result = moved(colRobot);
+    } else { // if player one or player two is human
+        result = moved(col);
+    }
+
+    let won = checkSolutionBoard(); // check board, search a solution
+
+    if (result == -1) { // if invalid movement
+        blipError.play();
+        showAlert("info", "Alert! Invalid movement.");
+    } else { // if valid movement
+        currentPlayer = currentPlayer == 1? 2: 1; // change current player
+    }
+
+    if (won != 0) { // update variable gameEnd
+        gameEnd = true;
+    }
+
+    // refresh board
+    insertBoard(board, player1, player2, currentPlayer);
+
+    if (won != 0) { // show the player won
+        if (won == -1) {
+            showMsgCongratulations("Draw game!", "There was a draw in the game!", "info");
+        } else {
+            playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
+            showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
+            modeDiscoActivated();
+        }
+        document.getElementById("btnStartGame").style.visibility = "visible";
+    } else {
+        if (currentPlayer == 2 && player2.isRobot()) {
+            move(col);
+        }
     }
 }
 
 /*
 * moved: make a moved one of the two players
+* 
+* return:
+*   -1 invalid movement
+*    0 valid movement
 */
 function moved(col) {
-    let robotError = false;
-    let changePlayer = false;
+    let moveError = false;
     let i = board.length-1;
     let fi = 0;
     while (i >= 0 && fi == 0) {
         if (board[i][col] == 0) {
             board[i][col] = currentPlayer;
-            changePlayer = true;
             fi = 1;
         } else if (i == 0 && board[i][col] != 0) {
-            if (!(currentPlayer == 2 && player2.isRobot())) {
-                robotError = true;
-            } else {
-                blipError.play();
-                showAlert("info", "Alert! Invalid movement.");
-            }
+            moveError = true;
+            colsNotFree[col] = 1;
             fi = 1;
         }
         i--;
     }
 
-    if (!robotError) {
-        let won = checkSolutionBoard();
-
-        if (changePlayer) {
-            currentPlayer = currentPlayer == 1? 2: 1;
-        }
-
-        if (won != 0) {
-            gameEnd = true;
-        }
-
-        insertBoard(board, player1, player2, currentPlayer);
-
-        if (won != 0) {
-            if (won == -1) {
-                showMsgCongratulations("Draw game!", "There was a draw in the game!", "info");
-            } else {
-                playerWon = won == 1? player1.meNameIs(): player2.meNameIs();
-                showMsgCongratulations(`And the winner is ${playerWon}!`, `Congratulations ${playerWon}! You have won the game!`, "success");
-                modeDiscoActivated();
-            }
-            document.getElementById("btnStartGame").style.visibility = "visible";
-        }
-    }
+    return moveError? -1: 0;
 }
 
 /* OTHER FUNCTIONS */
